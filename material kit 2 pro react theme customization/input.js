@@ -1,4 +1,3 @@
-
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -8,17 +7,32 @@ import MKBox from "components/MKBox";
 import MKInput from "components/MKInput";
 
 function InputDynamic() {
-  const [value, setValue] = useState("");
+  const [formValue, setFormValue] = useState("");
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setFormValue(event.target.value);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setFormValue("");
+    alert(formValue);
+  };
+
   return (
     <MKBox component="section" py={12}>
       <Container>
-        <p>{value}</p>
-        <Grid container item xs={12} lg={4} py={1} mx="auto">
-          <MKInput onChange={handleChange} variant="standard" label="Regular" fullWidth />
-        </Grid>
+        <form onSubmit={handleSubmit}>
+          <p>{formValue}</p>
+          <Grid container item xs={12} lg={4} py={1} mx="auto">
+            <MKInput
+              onChange={handleChange}
+              variant="standard"
+              label="Regular"
+              fullWidth
+              value={formValue}
+            />
+          </Grid>
+        </form>
       </Container>
     </MKBox>
   );
